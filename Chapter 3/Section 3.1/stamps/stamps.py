@@ -13,29 +13,43 @@ from itertools import combinations_with_replacement
 file_in  = open("stamps.in", "r")
 file_out = open("stamps.out", "w")
 
+MAX_V = 1000000
+
 K, N   = map(int, file_in.readline().split())
 stamps = list(map(int, file_in.read().split()))
+dp     = [False] * MAX_V
+hits   = [MAX_V] * MAX_V
 
-values = []
-for n in range(1, K + 1):
-	for c in combinations_with_replacement(stamps, n):
-		o = 1
-		for v in c:
-			o += v
-		values.append(o)
+for s in stamps:
+	dp[s]   = True
+	hits[s] = 1
 
-def findLongestConseqSubseq(arr, n): 
-	s = set() 
-	ans=0
-	for ele in arr: 
-		s.add(ele) 
-	for i in range(n): 
-		if (arr[i]-1) not in s: 
-			j=arr[i] 
-			while(j in s): 
-				j+=1
-			ans=max(ans, j-arr[i]) 
-	return ans 
+min_v = min(stamps)
+max_v = max(stamps) * K
 
-file_out.write(str(findLongestConseqSubseq(values, len(values))) + "\n")
+
+max_streak = 0
+streak     = 0
+for i in range(min_v, max_v + 1):
+	if(dp[i]):
+		streak += 1
+		
+		for n in range(0, N):
+			if(hits[i] < K):
+				dp[i + stamps[n]] = True
+				hits[i + stamps[n]] = min(hits[i + stamps[n]], hits[i] + 1)
+	else:
+		max_streak = max(max_streak, streak)
+		streak = 0
+
+max_streak = max(max_streak, streak)
+
+file_out.write(str(max_streak) + "\n")
+
+#Debug
+#for n in range(min_v, max_v + 1):
+#	print(dp[n], end=" ")
+#print()
+#for n in range(min_v, max_v + 1):
+#	print(hits[n], end=" ")
 
