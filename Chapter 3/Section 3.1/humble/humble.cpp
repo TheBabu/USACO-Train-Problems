@@ -26,7 +26,7 @@ int main()
 		S.insert(P[i]);
 	}
 	
-	//Go throught each prime once
+	//Go through each prime once
 	for(int i = 0; i != K; i++)
 	{
 		std::set<int>::iterator S_it = S.begin();
