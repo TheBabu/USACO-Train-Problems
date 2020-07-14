@@ -30,8 +30,6 @@ for wheel_str in file_in.read().split("\n")[:-1]:
 		wedges.append(wedge)
 	wheels.append(wedges)
 
-
-
 hit = False
 for time in range(0, 500):
 	wedges_sets = []
