@@ -31,7 +31,7 @@ for wheel_str in file_in.read().split("\n")[:-1]:
 	wheels.append(wedges)
 
 hit = False
-for time in range(0, 500):
+for time in range(0, 500): #500 is abritrary
 	wedges_sets = []
 	
 	for w in range(0, len(wheels)):
