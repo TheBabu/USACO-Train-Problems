@@ -1,8 +1,8 @@
 #!/usr/bin/python
 """
 ID: ten.to.1
+TASK: spin
 LANG: PYTHON3
-PROB: spin
 """
 
 import itertools
